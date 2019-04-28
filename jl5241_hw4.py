@@ -50,10 +50,11 @@ for i in range(10000):
     norm_out.append(np.linalg.norm((winf-wt), ord =1))
     if i in [9,99,999,9999]:
         rank = teams.iloc[np.argsort(-wt)[0]]
-        out.append([wt,rank])
-
+        wt_out = wt[0][np.argsort(-wt)[0]]
+        out.append([wt_out,rank])
+		
 def create_report(out, which):
-    df = pd.concat([out[which][1][0:25]['team_name'].reset_index(drop=True),pd.Series(out[which][0][:,:25][0])],axis=1)
+    df = pd.concat([out[which][1][0:25]['team_name'].reset_index(drop=True),pd.Series(out[which][0][:25])],axis=1)
     df.columns = ['team_name','w']
     print(df)
 
